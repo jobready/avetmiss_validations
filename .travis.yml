@@ -1,0 +1,16 @@
+language: ruby
+rvm:
+  - 2.1.1
+cache:
+  - bundler
+  - apt
+branches:
+  only:
+    - master
+    - develop
+notifications:
+  hipchat: 83906daf46b0ce558ce21f13353861@246078
+  on_success: always
+  on_failure: always
+script:
+  - bundle exec rspec
