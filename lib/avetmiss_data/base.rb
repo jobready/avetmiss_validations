@@ -1,5 +1,5 @@
 class AvetmissData::Base
-  class_attribute :file_format
+  class_attribute :file_format, :file
 
   def file_format_hash
     self.class.file_format
