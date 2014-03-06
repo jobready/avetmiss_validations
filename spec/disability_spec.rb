@@ -9,7 +9,7 @@ describe AvetmissData::Disability do
     end
 
     context 'NAT Record Parse' do
-      let!(:row) { "12345     13" }
+      let!(:row) { '12345     13' }
       subject { AvetmissData::Disability.parse(row) }
 
       specify { expect(subject).not_to be_blank }

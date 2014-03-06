@@ -1,5 +1,4 @@
 class AvetmissData::Achievement < AvetmissData::Base
-
   self.file = 'NAT00100'
   self.file_format = {
     client_identifier: 0...10,

@@ -1,5 +1,4 @@
 class AvetmissData::Rto < AvetmissData::Base
-
   self.file = 'NAT00010'
   self.file_format = {
     training_organisation_identifier: 0...10,

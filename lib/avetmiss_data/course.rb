@@ -1,5 +1,4 @@
 class AvetmissData::Course < AvetmissData::Base
-
   self.file = 'NAT00030'
   self.file_format = {
     qualification_identifier: 0...10,

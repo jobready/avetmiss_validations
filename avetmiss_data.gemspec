@@ -5,11 +5,11 @@ Gem::Specification.new do |s|
   s.name        = "avetmiss_data"
   s.version     = AvetmissData::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ['Brenton "B-Train" Fletcher, Jehanzeb Khan']
-  s.email       = []
+  s.authors     = ['Brenton "B-Train" Fletcher', 'Jehanzeb Khan']
+  s.email       = ['brentonf@jobready.com.au', 'jehanzebk@jobready.com.au']
   s.homepage    = "http://github.com/jobready/avetmiss_data"
-  s.summary     = ""
-  s.description = ""
+  s.summary     = "Gem for parsing and building AVETMISS (NAT) Files"
+  s.description = "Parsing and building AVETMISS files"
 
   s.required_rubygems_version = ">= 1.3.6"
   s.rubyforge_project         = "avetmiss_data"

@@ -9,7 +9,7 @@ describe AvetmissData::ClientPostalDetail do
     end
 
     context 'NAT Record Parse' do
-      let!(:row) { "12345     Mr  Mount                                   Franklin                                Some Steet                                                                                          Aarons Pass                                       2850010312121231                              0222222222          ritar@jobready.com.au                                                           " }
+      let!(:row) { '12345     Mr  Mount                                   Franklin                                Some Steet                                                                                          Aarons Pass                                       2850010312121231                              0222222222          ritar@jobready.com.au                                                           ' }
       subject { AvetmissData::ClientPostalDetail.parse(row) }
 
       specify { expect(subject).not_to be_blank }

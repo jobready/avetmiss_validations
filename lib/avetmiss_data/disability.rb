@@ -1,5 +1,4 @@
 class AvetmissData::Disability < AvetmissData::Base
-
   self.file = 'NAT00090'
   self.file_format = {
     client_identifier: 0...10,

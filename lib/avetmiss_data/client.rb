@@ -1,5 +1,4 @@
 class AvetmissData::Client < AvetmissData::Base
-
   self.file = 'NAT00080'
   self.file_format = {
     client_identifier: 0...10,
