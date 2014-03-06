@@ -9,7 +9,7 @@ describe AvetmissData::UnitOfCompetency do
     end
 
     context 'NAT Record Parse' do
-      let!(:row) { "MAE1         Academic English 1                                                                                  000000N0025" }
+      let!(:row) { 'MAE1         Academic English 1                                                                                  000000N0025' }
       subject { AvetmissData::UnitOfCompetency.parse(row) }
 
       specify { expect(subject).not_to be_blank }

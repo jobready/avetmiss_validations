@@ -9,7 +9,7 @@ describe AvetmissData::Course do
     end
 
     context 'NAT Record Parse' do
-      let!(:row) { "UTE31206  Electrotechnology Fire Protection Control                                                           0420115140313341111N" }
+      let!(:row) { 'UTE31206  Electrotechnology Fire Protection Control                                                           0420115140313341111N' }
       subject { AvetmissData::Course.parse(row) }
 
       specify { expect(subject).not_to be_blank }

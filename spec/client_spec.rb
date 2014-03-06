@@ -9,7 +9,7 @@ describe AvetmissData::Client do
     end
 
     context 'NAT Record Parse' do
-      let!(:row) { "12345     Franklin, Mount                                             091990M02091964285021201030012YYY Aarons Pass                                       " }
+      let!(:row) { '12345     Franklin, Mount                                             091990M02091964285021201030012YYY Aarons Pass                                       ' }
       subject { AvetmissData::Client.parse(row) }
 
       specify { expect(subject).not_to be_blank }

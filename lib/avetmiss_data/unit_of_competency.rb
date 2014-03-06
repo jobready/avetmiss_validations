@@ -1,5 +1,4 @@
 class AvetmissData::UnitOfCompetency < AvetmissData::Base
-
   self.file = 'NAT00060'
   self.file_format = {
     unit_competency_flag: 0...1,
