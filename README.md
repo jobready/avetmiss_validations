@@ -1,5 +1,6 @@
 # AVETMISS Data
 
+[![Build Status](https://magnum.travis-ci.com/jobready/avetmiss_data.png?token=rpAHEL3fvHDpfBeDNS3M&branch=develop)](https://magnum.travis-ci.com/jobready/avetmiss_data)
 [![Code Climate](https://codeclimate.com/repos/53169ebae30ba0581c007800/badges/63459af2a47ba777d79f/gpa.png)](https://codeclimate.com/repos/53169ebae30ba0581c007800/feed)
 
 This gem supports the parsing and unparsing of AVETMISS NAT data.
