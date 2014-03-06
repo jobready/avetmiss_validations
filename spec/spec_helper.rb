@@ -8,6 +8,9 @@
 require 'bundler/setup'
 Bundler.require(:default, :development)
 
+require 'codeclimate-test-reporter'
+CodeClimate::TestReporter.start
+
 require 'avetmiss_data'
 
 RSpec.configure do |config|
