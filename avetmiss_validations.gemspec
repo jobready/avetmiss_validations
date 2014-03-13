@@ -1,13 +1,13 @@
 # -*- encoding: utf-8 -*-
-require File.expand_path('../lib/avetmiss_data/version', __FILE__)
+require File.expand_path('../lib/avetmiss_validations/version', __FILE__)
 
 Gem::Specification.new do |s|
-  s.name        = 'avetmiss_data'
-  s.version     = AvetmissData::VERSION
+  s.name        = 'avetmiss_validations'
+  s.version     = AvetmissValidations::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Brenton Fletcher', 'Jehanzeb Khan']
   s.email       = ['brentonf@jobready.com.au', 'jehanzebk@jobready.com.au']
-  s.homepage    = 'http://github.com/jobready/avetmiss_data'
+  s.homepage    = 'http://github.com/jobready/avetmiss_validations'
   s.summary     = 'Gem for parsing and building AVETMISS (NAT) Files'
   s.description = 'Parsing and building AVETMISS files'
   s.license       = 'MIT'

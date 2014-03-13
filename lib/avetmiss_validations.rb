@@ -1,0 +1,12 @@
+require 'active_support/all'
+
+require 'avetmiss_validations/stores/base'
+#require 'avetmiss_data/stores/rto_delivery_location'
+#require 'avetmiss_data/stores/course'
+#require 'avetmiss_data/stores/unit_of_competency'
+#require 'avetmiss_data/stores/client'
+#require 'avetmiss_data/stores/client_postal_detail'
+#require 'avetmiss_data/stores/disability'
+#require 'avetmiss_data/stores/achievement'
+#require 'avetmiss_data/stores/enrolment'
+#require 'avetmiss_data/stores/qual_completion'
