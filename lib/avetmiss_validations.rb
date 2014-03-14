@@ -1,5 +1,6 @@
 require 'active_support/all'
 
+require 'avetmiss_validations/package'
 require 'avetmiss_validations/stores/base'
 #require 'avetmiss_data/stores/rto_delivery_location'
 #require 'avetmiss_data/stores/course'
