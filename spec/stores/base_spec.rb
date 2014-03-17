@@ -1,73 +1,67 @@
 require 'spec_helper'
 
+class PassingValidator < AvetmissValidations::Validator
+  def validate
+  end
+end
+
+class FailingValidator < AvetmissValidations::Validator
+  def validate
+    errors << {}
+  end
+end
+
 describe AvetmissData::Stores::Base do
-  context '.nat_file' do
-    let(:store_base) { AvetmissData::Stores::Base.new }
-    before { AvetmissData::Stores::Base.nat_file('TEST', {}) }
-    specify { expect(store_base.file_name).to eq('TEST') }
+  let(:base_store) { AvetmissData::Stores::Base.new }
+
+  context 'simple passing validator' do
+    let(:validator) { PassingValidator.new(base_store) }
+    specify { expect(validator.errors?).to be_false }
+    specify { expect(validator.errors).to be_empty }
+    specify { expect(validator.warnings?).to be_false }
+    specify { expect(validator.warnings).to be_empty }
   end
 
-  context 'reading/writing' do
-    before do
-      AvetmissData::Stores::Base.nat_file("", {
-        foo: 0...5,
-        bar: 5...10,
-        baz: 10..-1
-      })
-    end
-
-    let!(:attrs_set) do
-      {
-        foo: '12345',
-        bar: 'abcde',
-        baz: 'LOL'
-      }
-    end
-
-    context '#attributes' do
-      let!(:store_base) { AvetmissData::Stores::Base.new(attrs_set) }
-      specify do
-        expect(store_base.attributes).to eq(
-          foo: '12345',
-          bar: 'abcde',
-          baz: 'LOL'
-        )
-      end
-    end
-
-    context 'sets attributes' do
-      context 'attributes=' do
-        let!(:store_base) { AvetmissData::Stores::Base.new }
-        before { store_base.attributes = attrs_set }
-        specify do
-          expect(store_base.foo).to eq('12345')
-          expect(store_base.bar).to eq('abcde')
-          expect(store_base.baz).to eq('LOL')
-        end
-      end
-
-      context 'on init' do
-        let!(:store_base) { AvetmissData::Stores::Base.new(attrs_set) }
-        specify do
-          expect(store_base.foo).to eq('12345')
-          expect(store_base.bar).to eq('abcde')
-          expect(store_base.baz).to eq('LOL')
-        end
-      end
-    end
-
-    context '.from_line' do
-      let!(:store_base) { AvetmissData::Stores::Base.from_line('12345abcdeLOL') }
-      specify do
-        expect(store_base.foo).to eq('12345')
-        expect(store_base.bar).to eq('abcde')
-        expect(store_base.baz).to eq('LOL')
-      end
-    end
-
-    context 'storing' do
-      let!(:store_base) { AvetmissData::Stores::Base.new(attrs_set) }
-      specify { expect(store_base.to_line).to eq('12345abcdeLOL') }
-    end
+  context 'simple failing validator' do
+    let(:validator) { FailingValidator.new(base_store) }
+    specify { expect(validator.errors?).to be_true }
+    specify { expect(validator.errors).not_to be_empty }
+    specify { expect(validator.warnings?).to be_false }
+    specify { expect(validator.warnings).to be_empty }
+    subject(:errors) { validator.errors }
+    specify { expect(errors.first).to eq({}) }
   end
+
+  context 'complex validator' do
+    let(:base_store) { AvetmissData::Stores::Base.new(:) }
+    let(:validator) { CompexValidator.new(base_store) }
+    specify { expect(validator.errors?).to be_true }
+    specify { expect(validator.errors).not_to be_empty }
+    specify { expect(validator.warnings?).to be_false }
+    specify { expect(validator.warnings).to be_empty }
+    subject(:errors) { validator.errors }
+    specify { expect(errors.first).to eq({}) }
+
+
+=begin
+  context '.validator' do
+    before { AvetmissData::Stores::Base.validator = PassingValidator }
+    specify { expect(base_store.validator).to eq(PassingValidator) }
+  end
+
+  specify { expect { base_store.errors? }.to raise_error AvetmissValidations::NotValidatedException }
+  specify { expect { base_store.warnings? }.to raise_error AvetmissValidations::NotValidatedException }
+
+  context 'has simple true validator' do
+    before { AvetmissData::Stores::Base.validator = PassingValidator }
+    specify { expect(base_store.errors?).to be_false }
+    specify { expect(base_store.warnings?).to be_false }
+  end
+
+  context 'has simple false validator' do
+    before { AvetmissData::Stores::Base.validator = FailingValidator }
+    specify { expect(base_store.errors?).to be_true }
+    specify { expect(base_store.warnings?).to be_false }
+  end
+=end
 end

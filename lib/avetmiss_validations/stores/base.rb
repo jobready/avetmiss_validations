@@ -1,4 +1,6 @@
 class AvetmissData::Stores::Base
+  class_attribute :validator
+
   class_attribute :nat_validations_lambda
 
   def has_nat_fatals?
