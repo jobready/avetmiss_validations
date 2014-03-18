@@ -5,7 +5,7 @@ class SimpleValidator < AvetmissValidations::ActiveModel::Validator
 end
 
 describe AvetmissValidations::ActiveModel::Validator do
-  let(:validator) { AvetmissValidations::ActiveModel::Validator.new(base_store) }
+  let(:validator) { SimpleValidator.new(base_store) }
 
   before do
     AvetmissData::Stores::Base.nat_file('', {

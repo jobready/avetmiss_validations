@@ -1,9 +1,12 @@
+# TODO
 class AvetmissValidations::ActiveModel::Validator < AvetmissValidations::Validator
-  class_attribute :attributes_validations
-  self.attributes_validations = []
+  class << self
+    attr_accessor :attributes_validations
 
-  def self.validates(attribute, validations)
-    attributes_validations << { attribute: attribute, validations: validations }
+    def validates(attribute, validations)
+      self.attributes_validations ||= []
+      self.attributes_validations << { attribute: attribute, validations: validations }
+    end
   end
 
   def initialize(store)
@@ -12,7 +15,7 @@ class AvetmissValidations::ActiveModel::Validator < AvetmissValidations::Validat
   end
 
   def validate
-    attributes_validations.each do |pair|
+    self.class.attributes_validations.each do |pair|
       apply_validations_on_attribute(pair[:attribute], pair[:validations])
     end
   end
