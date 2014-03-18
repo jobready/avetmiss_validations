@@ -1,7 +1,8 @@
 # AVETMISS Validations
 
 [![Build Status](https://travis-ci.org/jobready/avetmiss_validations.png?branch=develop)](https://travis-ci.org/jobready/avetmiss_validations)
-[![Code Climate](https://codeclimate.com/repos/5327c267e30ba02d8800120e/badges/ae467a0bb02c1a157a99/gpa.png)](https://codeclimate.com/repos/5327c267e30ba02d8800120e/feed)
+[![Coverage Status](https://coveralls.io/repos/jobready/avetmiss_validations/badge.png)](https://coveralls.io/r/jobready/avetmiss_validations)
+[![Code Climate](https://codeclimate.com/github/jobready/avetmiss_validations.png)](https://codeclimate.com/github/jobready/avetmiss_validations)
 
 This gem supports the parsing and exporting of AVETMISS (http://www.ncver.edu.au/) data.
 
