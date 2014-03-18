@@ -1,4 +1,4 @@
-# AVETMISS Data
+# AVETMISS Validations
 
 [![Build Status](https://magnum.travis-ci.com/jobready/avetmiss_data.png?token=rpAHEL3fvHDpfBeDNS3M&branch=develop)](https://magnum.travis-ci.com/jobready/avetmiss_data)
 [![Coverage Status](https://coveralls.io/repos/jobready/avetmiss_data/badge.png)](https://coveralls.io/r/jobready/avetmiss_data)
