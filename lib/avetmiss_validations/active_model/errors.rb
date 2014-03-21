@@ -8,6 +8,7 @@ class AvetmissValidations::ActiveModel::Errors < ActiveModel::Errors
     @validator.add_result({
       base: @base,
       attribute: attribute,
+      value: @base.send(attribute),
       message: message,
       #normalize_message(attribute, message, options),
       validator_type: options[:validator_type]
