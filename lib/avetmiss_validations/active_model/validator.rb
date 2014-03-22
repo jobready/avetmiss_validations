@@ -3,8 +3,11 @@ class AvetmissValidations::ActiveModel::Validator < AvetmissValidations::Validat
   class << self
     attr_accessor :attributes_validations
 
+    def attributes_validations
+      @attributes_validations ||= []
+    end
+
     def validates(attribute, validations)
-      self.attributes_validations ||= []
       self.attributes_validations << { attribute: attribute, validations: validations }
     end
   end
