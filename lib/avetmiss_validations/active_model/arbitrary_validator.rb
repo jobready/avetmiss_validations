@@ -1,11 +1,11 @@
 # Validates a record using an aribtrary piece of code (as a proc or a method call). For example:
-# 
+#
 #     validates :new_apprenticeships_training_contract_identifier, arbitrary: (lambda do |field|
 #       Contract.where(base_student_contract_id: field).exists?
 #     end)
 #
 # These are the valid ways to supply the proc or method (the procish):
-# 
+#
 #     validates :field, arbitrary: procish
 #     validates :field, arbitrary: { lambda: procish }
 #     validates :field, arbitrary: { proc: procish }
@@ -26,6 +26,8 @@ class AvetmissValidations::ActiveModel::ArbitraryValidator < ActiveModel::EachVa
     end
 
     args = case procish.arity
+    when 3
+      [options[:avetmiss_validator], record, value]
     when 2
       [record, value]
     when 1
@@ -37,7 +39,8 @@ class AvetmissValidations::ActiveModel::ArbitraryValidator < ActiveModel::EachVa
     end
 
     unless record.instance_exec(*args, &procish)
-      record.errors.add(attribute, :arbitrary, options.except(:lambda, :proc, :with).merge!(value: value))
+      record.errors.add(attribute, :arbitrary,
+                        options.except(:lambda, :proc, :with, :avetmiss_validator).merge!(value: value))
     end
   end
 

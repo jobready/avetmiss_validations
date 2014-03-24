@@ -25,8 +25,9 @@ class AvetmissValidations::ActiveModel::Validator < AvetmissValidations::Validat
 
   def apply_validations_on_attribute(attribute, validations)
     validations.each_pair do |type, options|
-      options = active_model_class.send(:_parse_validates_options, options).merge(attributes: [attribute],
-                                                                                  validator_type: type)
+      options = active_model_class.send(:_parse_validates_options, options).dup
+      options.merge!(attributes: [attribute], validator_type: type, avetmiss_validator: self)
+
       validator_for_type(type).new(options).validate(@store_proxy)
     end
   end
