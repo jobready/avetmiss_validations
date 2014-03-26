@@ -8,7 +8,8 @@ class AvetmissValidations::ActiveModel::Validator < AvetmissValidations::Validat
     end
 
     def validates(attribute, validations)
-      self.attributes_validations << { attribute: attribute, validations: validations }
+      options = validations.extract!(:if, :unless)
+      self.attributes_validations << { attribute: attribute, validations: validations, options: options }
     end
   end
 
@@ -19,17 +20,29 @@ class AvetmissValidations::ActiveModel::Validator < AvetmissValidations::Validat
 
   def validate
     self.class.attributes_validations.each do |pair|
-      apply_validations_on_attribute(pair[:attribute], pair[:validations])
+      apply_validations_on_attribute(pair[:attribute], pair[:validations], pair[:options])
     end
   end
 
-  def apply_validations_on_attribute(attribute, validations)
+  def apply_validations_on_attribute(attribute, validations, options)
+    return unless should_validate?(attribute, options)
+
     validations.each_pair do |type, options|
-      options = active_model_class.send(:_parse_validates_options, options).dup
-      options.merge!(attributes: [attribute], validator_type: type, avetmiss_validator: self)
+      options = active_model_class.send(:_parse_validates_options, options).merge(
+        attributes: [attribute], validator_type: type)
 
       validator_for_type(type).new(options).validate(@store_proxy)
     end
+  end
+
+  def should_validate?(attribute, options)
+    if options[:if]
+      return !!@store_proxy.execute_in_context(options[:if], @store_proxy.send(attribute))
+    end
+    if options[:unless]
+      return !@store_proxy.execute_in_context(options[:unless], @store_proxy.send(attribute))
+    end
+    true
   end
 
   def add_result(result)

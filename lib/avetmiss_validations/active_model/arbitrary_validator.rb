@@ -19,26 +19,7 @@
 # all methods of the record.
 class AvetmissValidations::ActiveModel::ArbitraryValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
-    procish = if validator.is_a?(Symbol)
-      record.method(validator)
-    else
-      validator
-    end
-
-    args = case procish.arity
-    when 3
-      [options[:avetmiss_validator], record, value]
-    when 2
-      [record, value]
-    when 1
-      [value]
-    when 0, -1
-      []
-    else
-      fail 'Wrong arity!'
-    end
-
-    unless record.instance_exec(*args, &procish)
+    unless record.execute_in_context(validator, value)
       record.errors.add(attribute, :arbitrary,
                         options.except(:lambda, :proc, :with, :avetmiss_validator).merge!(value: value))
     end
