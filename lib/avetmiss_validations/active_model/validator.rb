@@ -1,16 +1,11 @@
 # TODO
 class AvetmissValidations::ActiveModel::Validator < AvetmissValidations::Validator
-  class << self
-    attr_accessor :attributes_validations
+  class_attribute :attributes_validations
+  self.attributes_validations = []
 
-    def attributes_validations
-      @attributes_validations ||= []
-    end
-
-    def validates(attribute, validations)
-      options = validations.extract!(:if, :unless)
-      self.attributes_validations << { attribute: attribute, validations: validations, options: options }
-    end
+  def self.validates(attribute, validations)
+    options = validations.extract!(:if, :unless)
+    self.attributes_validations << { attribute: attribute, validations: validations, options: options }
   end
 
   def initialize(store)
