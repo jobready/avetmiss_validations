@@ -19,15 +19,8 @@
 # all methods of the record.
 class AvetmissValidations::ActiveModel::ArbitraryValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
-    unless record.execute_in_context(validator, value)
-      record.errors.add(attribute, :arbitrary,
-                        options.except(:lambda, :proc, :with, :avetmiss_validator).merge!(value: value))
+    unless record.validator.send(options[:with], record, value)
+      record.errors.add(attribute, :arbitrary, options.except(:with).merge!(value: value))
     end
-  end
-
-  private
-
-  def validator
-    @validator ||= options[:lambda] || options[:proc] || options[:with]
   end
 end

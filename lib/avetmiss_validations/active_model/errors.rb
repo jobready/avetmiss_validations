@@ -10,7 +10,6 @@ class AvetmissValidations::ActiveModel::Errors < ActiveModel::Errors
       attribute: attribute,
       value: @base.send(attribute),
       message: message,
-      #normalize_message(attribute, message, options),
       validator_type: options[:validator_type]
     })
   end

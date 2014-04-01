@@ -32,10 +32,10 @@ class AvetmissValidations::ActiveModel::Validator < AvetmissValidations::Validat
 
   def should_validate?(attribute, options)
     if options[:if]
-      return !!@store_proxy.execute_in_context(options[:if], @store_proxy.send(attribute))
+      return !!send(options[:if], store, store.send(attribute))
     end
     if options[:unless]
-      return !@store_proxy.execute_in_context(options[:unless], @store_proxy.send(attribute))
+      return !send(options[:unless], store, store.send(attribute))
     end
     true
   end

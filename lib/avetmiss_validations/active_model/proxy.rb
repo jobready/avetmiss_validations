@@ -14,25 +14,4 @@ class AvetmissValidations::ActiveModel::Proxy < SimpleDelegator
   end
 
   alias_method :read_attribute_for_validation, :send
-
-  def execute_in_context(procish_name, value)
-    procish = if procish_name.is_a?(Symbol)
-      method(procish_name)
-    else
-      procish_name
-    end
-
-    args = case procish.arity
-    when 2
-      [self, value]
-    when 1
-      [value]
-    when 0, -1
-      []
-    else
-      fail 'Wrong arity!'
-    end
-
-    instance_exec(*args, &procish)
-  end
 end
