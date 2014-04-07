@@ -23,4 +23,15 @@ describe AvetmissValidations::Validator do
       specify { expect(validator.valid?).to be_false }
     end
   end
+
+  context '#invalid?' do
+    context 'when no results' do
+      specify { expect(validator.invalid?).to be_false }
+    end
+
+    context 'when has results' do
+      before { validator.results << :a }
+      specify { expect(validator.invalid?).to be_true }
+    end
+  end
 end

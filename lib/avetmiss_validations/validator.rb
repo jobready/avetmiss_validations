@@ -24,4 +24,8 @@ class AvetmissValidations::Validator
   def valid?
     results.empty?
   end
+
+  def invalid?
+    !valid?
+  end
 end
