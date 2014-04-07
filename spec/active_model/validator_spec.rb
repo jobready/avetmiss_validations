@@ -16,18 +16,14 @@ describe AvetmissValidations::ActiveModel::Validator do
   context 'valid' do
     let(:base_store) { AvetmissData::Stores::Base.new(foo: '1234') }
 
-    specify { expect(validator.fatals?).to be_false }
-    specify { expect(validator.fatals).to be_empty }
-    specify { expect(validator.warnings?).to be_false }
-    specify { expect(validator.warnings).to be_empty }
+    specify { expect(validator.valid?).to be_true }
+    specify { expect(validator.results).to be_empty }
   end
 
   context 'invalid' do
     let(:base_store) { AvetmissData::Stores::Base.new(foo: '') }
 
-    specify { expect(validator.fatals?).to be_true }
-    specify { expect(validator.fatals).not_to be_empty }
-    specify { expect(validator.warnings?).to be_false }
-    specify { expect(validator.warnings).to be_empty }
+    specify { expect(validator.valid?).to be_false }
+    specify { expect(validator.results).not_to be_empty }
   end
 end

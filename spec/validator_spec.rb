@@ -6,10 +6,21 @@ describe AvetmissValidations::Validator do
 
   context '#results' do
     before do
-      validator.fatals << :a
-      validator.warnings << :b
+      validator.results << :a
+      validator.results << :b
     end
 
     specify { expect(validator.results).to eq([:a, :b]) }
+  end
+
+  context '#valid?' do
+    context 'when no results' do
+      specify { expect(validator.valid?).to be_true }
+    end
+
+    context 'when has results' do
+      before { validator.results << :a }
+      specify { expect(validator.valid?).to be_false }
+    end
   end
 end
