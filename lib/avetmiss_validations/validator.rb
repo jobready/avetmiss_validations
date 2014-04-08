@@ -9,11 +9,12 @@
 # @attr [Array] fatals The list of fatal errors that occured.
 # @attr [Array] warnings The list of warnings that occured
 class AvetmissValidations::Validator
-  attr_accessor :store, :results
+  attr_accessor :store, :fatals, :warnings
 
   def initialize(store)
     @store = store
-    @results = []
+    @fatals = []
+    @warnings = []
     validate
   end
 
@@ -21,8 +22,16 @@ class AvetmissValidations::Validator
     raise "Subclass must implement #validate"
   end
 
-  def valid?
-    results.empty?
+  def results
+    fatals + warnings
+  end
+
+  def fatals?
+    fatals.present?
+  end
+
+  def warnings?
+    warnings.present?
   end
 
   def invalid?

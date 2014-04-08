@@ -41,7 +41,7 @@ class AvetmissValidations::ActiveModel::Validator < AvetmissValidations::Validat
   end
 
   def add_result(result)
-    results << result
+    fatals << result
   end
 
   private
