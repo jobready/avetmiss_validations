@@ -33,8 +33,4 @@ class AvetmissValidations::Validator
   def warnings?
     warnings.present?
   end
-
-  def invalid?
-    !valid?
-  end
 end
