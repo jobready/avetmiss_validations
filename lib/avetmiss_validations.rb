@@ -14,6 +14,7 @@ end
 
 require 'avetmiss_validations/validator'
 require 'avetmiss_validations/active_model/arbitrary_validator'
+require 'avetmiss_validations/active_model/arbitrary_model_validator'
 require 'avetmiss_validations/active_model/errors'
 require 'avetmiss_validations/active_model/proxy'
 require 'avetmiss_validations/active_model/validator'
