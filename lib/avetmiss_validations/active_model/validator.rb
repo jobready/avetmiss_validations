@@ -3,9 +3,17 @@ class AvetmissValidations::ActiveModel::Validator < AvetmissValidations::Validat
   class_attribute :attributes_validations
   self.attributes_validations = []
 
+  class_attribute :store_validations
+  self.store_validations = []
+
   def self.validates(attribute, validations)
     options = validations.extract!(:if, :unless)
     self.attributes_validations << { attribute: attribute, validations: validations, options: options }
+  end
+
+  # Allow the user to define validations on entire model
+  def self.validate(validation, options={})
+    self.store_validations << { validator_type: validation, options: options }
   end
 
   def initialize(store)
@@ -14,6 +22,12 @@ class AvetmissValidations::ActiveModel::Validator < AvetmissValidations::Validat
   end
 
   def validate
+    # validate entire store, not just attributes
+    self.class.store_validations.each do |options|
+      # TODO: handle if/unless should_validate
+      AvetmissValidations::ActiveModel::ArbitraryModelValidator.new(options).validate(@store_proxy)
+    end
+
     self.class.attributes_validations.each do |pair|
       apply_validations_on_attribute(pair[:attribute], pair[:validations], pair[:options])
     end
@@ -57,4 +71,3 @@ class AvetmissValidations::ActiveModel::Validator < AvetmissValidations::Validat
     Class.new.include(ActiveModel::Validations::ClassMethods).new
   end
 end
-

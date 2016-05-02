@@ -5,10 +5,12 @@ class AvetmissValidations::ActiveModel::Errors < ActiveModel::Errors
   end
 
   def add(attribute, message = nil, options = {})
+    value = attribute == :base ? '' : @base.send(attribute)
+
     @validator.add_result({
       base: @base,
       attribute: attribute,
-      value: @base.send(attribute),
+      value: value,
       message: message,
       validator_type: options[:validator_type]
     })
